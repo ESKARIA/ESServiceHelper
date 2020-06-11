@@ -19,4 +19,14 @@ public extension Thread {
             }
         }
     }
+    
+    func mainDelay(_ delay: TimeInterval,_ codeBlock: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: codeBlock)
+    }
+    
+    func doInBackground(_ codeBlock: @escaping () -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            codeBlock()
+        }
+    }
 }
